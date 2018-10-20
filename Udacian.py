@@ -12,25 +12,27 @@ class Udacian:
         return self.name+" is enrolled in " + self.city+ " studying " + self.nanodegree + " in sat am with ms.lujain , he/she is " + self.status
 
 memory = []
+
 form = '''<!DOCTYPE html>
-    <title>Message Board</title>
-    <form method="POST">
-        <textarea name="name" placeholder="Name"></textarea>
-        <br>
-        <textarea name="city" placeholder="City"></textarea>
-        <br>
-        <textarea name="enrollment" placeholder="Enrollment"></textarea>
-        <br>
-        <textarea name="nanodgree" placeholder="Nanodegree"></textarea>
-        <br>
-        <textarea name="status" placeholder="Status"></textarea>
-        <br>
-        <button type="submit">Save</button>
-    </form>
-    <pre>
+  <title>Message Board</title>
+  <form method="POST">
+    <textarea name="name" placeholder="Name"></textarea>
+    <br>
+    <textarea name="city" placeholder="City"></textarea>
+    <br>
+    <textarea name="enrollment" placeholder="Enrollment"></textarea>
+    <br>
+    <textarea name="nanodegree" placeholder="Nanodegree"></textarea>
+    <br>
+    <textarea name="status" placeholder="Status"></textarea>
+    <br>
+    <button type="submit">Press me!</button>
+  </form>
+  <pre>
 {}
-    </pre>
+  </pre>
 '''
+
 class UdacianHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         length = int(self.headers.get('content-length',0))
@@ -41,10 +43,10 @@ class UdacianHandler(BaseHTTPRequestHandler):
         city = parse_qs(data)["city"][0]
         enrollment = parse_qs(data)["enrollment"][0]
         enrollment = tuple(enrollment.split(' '))
-        nanadegree = parse_qs(data)["nanodegree"][0]
+        nanodegree = parse_qs(data)["nanodegree"][0]
         status = parse_qs(data)["status"][0]
         #message = message.replace("<","&alt;")
-        student = Udacian(name, city, enrollment, nanadegree, status)
+        student = Udacian(name, city, enrollment, nanodegree, status)
         memory.append(student)
         self.send_response(303)
         self.send_header('Location','/')
